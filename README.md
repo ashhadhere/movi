@@ -17,8 +17,10 @@ This app was developed using Android Studio with Java as the backend, it makes u
 
 NOTE: For the app to work you need to add The movie database api key in local.properties as API_KEY=yourapikey and following changes in the build.gradle.kts file.
 
-<pre>
-//build.gradle.kts file
+### build.gradle.kts
+
+```kotlin
+
   
 import java.util.Properties;
 import java.io.FileInputStream;
@@ -58,8 +60,8 @@ dependencies {
     annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
 
 }
+```
 
-</pre>
 
 ## Usage
 
