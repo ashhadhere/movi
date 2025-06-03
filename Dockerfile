@@ -1,6 +1,6 @@
 # --- Stage 1: Build the Java application ---
 # Use a Gradle image that includes Java for building, AND the Android SDK
-FROM ghcr.io/cirruslabs/android-sdk:latest AS builder
+FROM androidsdk/android-sdk:latest AS builder
 # OR: FROM androidsdk/android-sdk:latest (another common option)
 
 # Set the working directory inside the container
