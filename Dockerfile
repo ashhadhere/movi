@@ -1,12 +1,12 @@
 # --- Stage 1: Build the Java application ---
-# Use a Gradle image that includes Java for building
-FROM gradle:7.5-jdk17 AS builder
+# Use a Gradle image that includes Java for building, AND the Android SDK
+FROM ghcr.io/cirruslabs/android-sdk:latest AS builder
+# OR: FROM androidsdk/android-sdk:latest (another common option)
 
 # Set the working directory inside the container
 WORKDIR /app
 
 # Copy the Gradle wrapper files and build configuration files
-# This helps Docker cache these layers, speeding up subsequent builds if only source changes
 COPY gradlew .
 COPY gradlew.bat .
 COPY gradle ./gradle
@@ -24,7 +24,7 @@ RUN chmod +x ./gradlew
 # Build the application.
 # The ':app:bootJar' task is common for Spring Boot applications to create an executable JAR.
 # If your application is not Spring Boot or produces a different artifact,
-# you might use './gradlew :app:jar' or just './gradlew build'.
+# you might use './gradlew :app:jar' or just './some-other-build-command'.
 # The '-x test' flag skips running tests during the build.
 RUN ./gradlew :app:bootJar -x test
 
