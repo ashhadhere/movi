@@ -1,0 +1,36 @@
+pipeline:
+  name: Sample CI Pipeline
+  identifier: sample_ci_pipeline
+  stages:
+    - stage:
+        name: Build and Push Docker Image
+        identifier: build_push
+        type: CI
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Build Application
+                  identifier: build_app
+                  spec:
+                    shell: Bash
+                    command: |
+                      ./gradlew build
+              - step:
+                  type: Run
+                  name: Run Tests
+                  identifier: run_tests
+                  spec:
+                    shell: Bash
+                    command: |
+                      ./gradlew test
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: Build and Push Docker Image
+                  identifier: build_push_image
+                  spec:
+                    connectorRef: <dockerhub_connector_identifier>
+                    imageName: yourdockerhubusername/yourapp
+                    tags:
+                      - latest
